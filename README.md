@@ -56,10 +56,88 @@ Planned future features:
 
 ---
 
+## ✨ Current Features
+
+- ✅ **Intuitive Interface**: Clean, modern UI with responsive design
+- ✅ **Dynamic Placeholders**: Use `[color]` and `[size]` placeholders in your base title
+- ✅ **Custom Variants**: Add custom colors and sizes beyond the predefined options
+- ✅ **Real-time Generation**: Instantly generate all possible combinations
+- ✅ **One-Click Copy**: Copy all generated listings to clipboard
+- ✅ **Results Management**: Clear results and start fresh anytime
+- ✅ **Visual Feedback**: Count display and organized listing preview
+
+---
+
+## 🎬 Demo
+
+**Step 1**: Enter your base product title with placeholders
+```
+Gildan Heavy Cotton T-Shirt for [color] Lovers, Size [size], Premium Quality
+```
+
+**Step 2**: Select or add custom colors and sizes
+- Colors: Black, White, Navy, Red + custom "Forest Green"
+- Sizes: S, M, L, XL + custom "XXS"
+
+**Step 3**: Generate and get results like:
+```
+Gildan Heavy Cotton T-Shirt for Black Lovers, Size S, Premium Quality
+Gildan Heavy Cotton T-Shirt for White Lovers, Size M, Premium Quality
+... (20 total combinations)
+```
+
+---
+
 ## 📌 Project Status
 
-> 🛠️ This project is currently in planning and early development.  
-> 🎯 First milestone: Build a basic tool that accepts inputs and generates listing combinations.
+> ✅ **MVP Complete**: Basic functionality implemented and working  
+> 🛠️ **Active Development**: Adding new features and improvements  
+> 🎯 **Next Milestone**: CSV export functionality and template saving
+
+---
+
+## 🗺️ Roadmap
+
+### Phase 1: Core Features (✅ Complete)
+- [x] Basic title generation
+- [x] Custom color/size input
+- [x] Copy to clipboard
+- [x] Responsive design
+
+### Phase 2: Enhanced Functionality (🚧 In Progress)
+- [ ] Bulk description generation
+- [ ] Template saving and loading
+- [ ] Undo/Redo functionality
+
+### Phase 3: Advanced Features (📋 Planned)
+- [ ] AI-powered content suggestions
+- [ ] User accounts and cloud sync
+- [ ] Analytics and usage tracking
+- [ ] Multiple marketplace optimizations
+- [ ] Batch processing for large datasets
+
+---
+
+## 🛠️ Troubleshooting
+
+### Common Issues
+
+**Issue**: "Nothing happens when I click Generate"  
+**Solution**: Make sure you've entered a base title with `[color]` and `[size]` placeholders, and selected at least one color and size.
+
+**Issue**: "Copy to clipboard doesn't work"  
+**Solution**: This feature requires HTTPS or localhost. If you're on a different domain, manually select and copy the text.
+
+**Issue**: "Custom colors/sizes aren't being added"  
+**Solution**: After typing your custom value, press Enter or click away from the input field to confirm the addition.
+
+### Getting Help
+
+If you encounter any issues:
+1. Check the browser console for error messages
+2. Ensure you're using a modern browser (Chrome, Firefox, Safari, Edge)
+3. Try refreshing the page
+4. [Open an issue](https://github.com/yourusername/list-engine/issues) with details about your problem
 
 ---
 
@@ -71,10 +149,84 @@ Javascript Developer & E-commerce Product Lister
 
 ---
 
-## 🤝 Contributions
+## ⚙️ Installation & Setup
 
-This is a personal tool born out of necessity. Suggestions, feedback, and collaboration are welcome!
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+- **Node.js** (version 18 or higher)
+- **npm** (comes with Node.js)
+- **Git** (for cloning the repository)
+
+### Local Development
+
+To get a local copy of the project up and running, follow these simple steps:
+
+1. **Clone the Repository**
+   ```shell
+   git clone https://github.com/ahmed-jobayer/list-engine
+   cd list-engine
+   ```
+
+2. **Install Dependencies**
+   ```shell
+   npm install
+   ```
+
+3. **Run the Development Server**
+   ```shell
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+4. **Build for Production**
+   ```shell
+   npm run build
+   npm start
+   ```
+
+### Available Scripts
+
+- `npm run dev` - Starts the development server
+- `npm run build` - Creates an optimized production build
+- `npm run start` - Starts the production server
+- `npm run lint` - Runs ESLint to check code quality
+<!-- 
+### Deployment
+
+The easiest way to deploy ListEngine is to use [Vercel](https://vercel.com/), the platform from the creators of Next.js: -->
+
+1. Push your code to GitHub
+2. Import your repository on Vercel
+3. Deploy with zero configuration
+
+Alternatively, you can deploy to other platforms like Netlify, Railway, or any hosting service that supports Node.js applications.
 
 ---
+
+## 🧪 Testing
+
+Tests can be run using Jest. To execute tests, run:
+
+```shell
+npm run test
+```
+
+Ensure all new code is accompanied by appropriate tests.
+
+---
+
+## 👥 Contributing
+
+This is a personal tool born out of necessity, and contributions are welcome! Feel free to check the [issues](https://github.com/ahmed-jobayer/list-engine/issues) for ways to help out.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/YourFeature`)
+3. Commit your Changes (`git commit -m 'Add some feature'`)
+4. Push to the Branch (`git push origin feature/YourFeature`)
+5. Open a Pull Request
+
+---
+
 
 

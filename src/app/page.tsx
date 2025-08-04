@@ -3,6 +3,7 @@
 import { useState } from "react";
 import CreatableSelect from "react-select/creatable";
 import { ActionMeta, MultiValue } from "react-select";
+import { toast } from "sonner";
 
 interface Option {
   value: string;
@@ -41,7 +42,7 @@ export default function Home() {
 
   const handleGenerate = (): void => {
     if (!selectedColors.length || !selectedSizes.length) {
-      alert("Please select at least one color and one size.");
+      toast('Please select at least one color and one size.');
       return;
     }
 
@@ -62,10 +63,10 @@ export default function Home() {
   const copyToClipboard = async (): Promise<void> => {
     try {
       await navigator.clipboard.writeText(generatedListings.join("\n"));
-      alert("Copied to clipboard!");
+      toast('Copied to clipboard!');
     } catch (err) {
       console.error("Failed to copy: ", err);
-      alert("Failed to copy to clipboard");
+      toast('Failed to copy to clipboard');
     }
   };
 
