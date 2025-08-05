@@ -2,6 +2,12 @@
 
 **ListEngine** is a productivity-focused tool built for e-commerce sellers who need to generate large sets of product listing titles and descriptions efficiently. Designed especially for platforms like **Amazon** and **Walmart**, ListEngine automates one of the most repetitive and time-consuming parts of the product listing process — creating unique titles for each product variant (e.g., color and size combinations).
 
+## 🌐 Live Demo
+
+**Try it now:** [https://listengine.vercel.app](https://listengine.vercel.app)
+
+> 🚀 The application is live and ready to use! No installation required.
+
 ---
 
 ## 🚀 Project Vision
@@ -145,7 +151,7 @@ If you encounter any issues:
 
 **Jobayer Ahmed**  
 Javascript Developer & E-commerce Product Lister  
-[LinkedIn](https://www.linkedin.com/in/jobayerahmmed7/) | [GitHub](https://github.com/ahmed-jobayer)
+[Portfolio](https://jobayerahmed.vercel.app/) | [LinkedIn](https://www.linkedin.com/in/jobayerahmmed7/) | [GitHub](https://github.com/ahmed-jobayer)
 
 ---
 
@@ -178,6 +184,8 @@ To get a local copy of the project up and running, follow these simple steps:
    npm run dev
    ```
    Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   
+   > **Note**: You can also try the live version at [https://listengine.vercel.app](https://listengine.vercel.app)
 
 4. **Build for Production**
    ```shell
