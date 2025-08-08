@@ -37,23 +37,49 @@ export default function Home() {
   const [baseProduct, setBaseProduct] = useState<string>("");
   const [selectedColors, setSelectedColors] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
+  const [selectedPacks, setSelectedPacks] = useState<Option[]>([]);
   const [generatedListings, setGeneratedListings] = useState<string[]>([]);
 
 
   const handleGenerate = (): void => {
-    if (!selectedColors.length || !selectedSizes.length) {
-      toast('Please select at least one color and one size.');
+    // Check if base product is entered
+    if (!baseProduct.trim()) {
+      toast('Please enter a base product title.');
+      return;
+    }
+
+    // Check if at least one variant is selected (color, size, or pack)
+    const hasVariants = selectedColors.length > 0 || selectedSizes.length > 0 || selectedPacks.length > 0;
+    if (!hasVariants) {
+      toast('Please select at least one variant (color, size, or pack).');
       return;
     }
 
     const combinations: string[] = [];
+    
+    // Use empty arrays with single empty item if no selection for that variant
+    const colorsToUse = selectedColors.length > 0 ? selectedColors : [{ value: '', label: '' }];
+    const sizesToUse = selectedSizes.length > 0 ? selectedSizes : [{ value: '', label: '' }];
+    const packsToUse = selectedPacks.length > 0 ? selectedPacks : [{ value: '', label: '' }];
 
-    selectedColors.forEach((color: Option) => {
-      selectedSizes.forEach((size: Option) => {
-        let listing = baseProduct;
-        listing = listing.replace("[color]", color.value);
-        listing = listing.replace("[size]", size.value);
-        combinations.push(listing);
+    colorsToUse.forEach((color: Option) => {
+      sizesToUse.forEach((size: Option) => {
+        packsToUse.forEach((pack: Option) => {
+          let listing = baseProduct;
+          
+          // Replace placeholders only if they exist in the base product and have values
+          if (color.value && listing.includes('[color]')) {
+            listing = listing.replace(/\[color\]/g, color.value);
+          }
+          if (size.value && listing.includes('[size]')) {
+            listing = listing.replace(/\[size\]/g, size.value);
+          }
+          if (pack.value && listing.includes('[pack]')) {
+            listing = listing.replace(/\[pack\]/g, pack.value);
+          }
+          
+          combinations.push(listing);
+        });
       });
     });
 
@@ -103,6 +129,27 @@ export default function Home() {
     setSelectedSizes([...selectedSizes, newSize]);
   };
 
+  const handlePackChange = (
+    newValue: MultiValue<Option>,
+    actionMeta: ActionMeta<Option>
+  ): void => {
+    console.log("Pack selection changed:", newValue, actionMeta);
+    setSelectedPacks(Array.from(newValue));
+  };
+
+  const handlePackCreate = (inputValue: string): void => {
+    // Validate that it's a number
+    const numValue = inputValue.trim();
+    if (!/^\d+$/.test(numValue)) {
+      toast('Pack value must be a number.');
+      return;
+    }
+    
+    const newPack: Option = { value: numValue, label: numValue };
+    console.log("Creating new pack:", newPack);
+    setSelectedPacks([...selectedPacks, newPack]);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-8">
@@ -128,7 +175,7 @@ export default function Home() {
                 value={baseProduct}
                 onChange={(e) => setBaseProduct(e.target.value)}
                 className="w-full text-black p-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors duration-200 h-24 resize-none text-sm"
-                placeholder="Enter your product title with [color] and [size] placeholders"
+                placeholder="Enter your product title with [color], [size], and [pack] placeholders"
               />
               <div className="flex items-center mt-2 text-sm text-gray-500">
                 <span className="mr-2">💡</span>
@@ -136,16 +183,19 @@ export default function Home() {
                 <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded font-mono text-xs mx-1">
                   [color]
                 </span>{" "}
-                and{" "}
                 <span className="bg-green-100 text-green-800 px-2 py-1 rounded font-mono text-xs mx-1">
                   [size]
+                </span>{" "}
+                and{" "}
+                <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded font-mono text-xs mx-1">
+                  [pack]
                 </span>{" "}
                 as placeholders
               </div>
             </div>
 
             {/* Selection Grid */}
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
               {/* Colors */}
               <div>
                 <label className="block text-lg font-semibold text-gray-700 mb-3">
@@ -295,6 +345,81 @@ export default function Home() {
                   Type any size and press Enter to add custom sizes
                 </div>
               </div>
+
+              {/* Packs */}
+              <div>
+                <label className="block text-lg font-semibold text-gray-700 mb-3">
+                  📦 Select Pack Quantities
+                </label>
+                <CreatableSelect<Option, true>
+                  options={[]}
+                  isMulti
+                  value={selectedPacks}
+                  onChange={handlePackChange}
+                  onCreateOption={handlePackCreate}
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  placeholder="Type pack quantities (numbers only)..."
+                  formatCreateLabel={(inputValue: string) =>
+                    `Add "${inputValue}"`
+                  }
+                  styles={{
+                    control: (base) => ({
+                      ...base,
+                      borderRadius: "12px",
+                      borderWidth: "2px",
+                      borderColor: "#e5e7eb",
+                      padding: "4px",
+                      backgroundColor: "white",
+                      "&:hover": {
+                        borderColor: "#f97316",
+                      },
+                      "&:focus-within": {
+                        borderColor: "#f97316",
+                        boxShadow: "0 0 0 1px #f97316",
+                      },
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      backgroundColor: "white",
+                      borderRadius: "12px",
+                      border: "2px solid #e5e7eb",
+                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+                    }),
+                    option: (base, state) => ({
+                      ...base,
+                      backgroundColor: state.isFocused ? "#fed7aa" : "white",
+                      color: "#1f2937",
+                      fontWeight: state.isFocused ? "500" : "400",
+                      "&:active": {
+                        backgroundColor: "#fdba74",
+                      },
+                    }),
+                    multiValue: (base) => ({
+                      ...base,
+                      backgroundColor: "#fed7aa",
+                      borderRadius: "8px",
+                    }),
+                    multiValueLabel: (base) => ({
+                      ...base,
+                      color: "#c2410c",
+                      fontWeight: "500",
+                    }),
+                    multiValueRemove: (base) => ({
+                      ...base,
+                      color: "#c2410c",
+                      "&:hover": {
+                        backgroundColor: "#f97316",
+                        color: "white",
+                      },
+                    }),
+                  }}
+                />
+                <div className="flex items-center mt-2 text-sm text-gray-500">
+                  <span className="mr-2">🔢</span>
+                  Type numbers only (e.g., 1, 2, 5, 12) and press Enter
+                </div>
+              </div>
             </div>
 
             {/* Generate Button */}
@@ -361,7 +486,7 @@ export default function Home() {
                 </h3>
                 <ul className="text-gray-600 space-y-1 text-sm">
                   <li>
-                    • Enter your base product title with [color] and [size]
+                    • Enter your base product title with [color], [size], and [pack]
                     placeholders
                   </li>
                   <li>
@@ -372,6 +497,10 @@ export default function Home() {
                     • Select sizes from the list or type custom sizes (like 4XL,
                     XXXS, etc.)
                   </li>
+                  <li>
+                    • Enter pack quantities as numbers (like 1, 2, 5, 12, etc.)
+                  </li>
+                  <li>• At least one variant (color, size, or pack) must be selected</li>
                   <li>• Click generate to create all possible combinations</li>
                   <li>• Copy the results for your product listings</li>
                 </ul>
