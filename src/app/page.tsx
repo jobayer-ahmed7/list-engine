@@ -35,6 +35,7 @@ const sizes: Option[] = [
 
 export default function Home() {
   const [baseProduct, setBaseProduct] = useState<string>("");
+  const [colorInput, setColorInput] = useState<string>("");
   const [selectedColors, setSelectedColors] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [selectedPacks, setSelectedPacks] = useState<Option[]>([]);
@@ -107,6 +108,23 @@ export default function Home() {
     console.log("Color selection changed:", newValue, actionMeta);
     
     setSelectedColors(Array.from(newValue));
+  };
+
+  const handleColorInputChange = (value: string): void => {
+    setColorInput(value);
+    
+    // Parse comma-separated colors and update selectedColors
+    if (value.trim()) {
+      const colors = value
+        .split(',')
+        .map(color => color.trim())
+        .filter(color => color.length > 0)
+        .map(color => ({ value: color, label: color }));
+      
+      setSelectedColors(colors);
+    } else {
+      setSelectedColors([]);
+    }
   };
 
   const handleColorCreate = (inputValue: string): void => {
@@ -199,75 +217,30 @@ export default function Home() {
               {/* Colors */}
               <div>
                 <label className="block text-lg font-semibold text-gray-700 mb-3">
-                  🎨 Select Colors
+                  🎨 Enter Colors
                 </label>
-                <CreatableSelect<Option, true>
-                  options={colors}
-                  isMulti
-                  value={selectedColors}
-                  onChange={handleColorChange}
-                  onCreateOption={handleColorCreate}
-                  className="react-select-container"
-                  classNamePrefix="react-select"
-                  placeholder="Choose or type custom colors..."
-                  formatCreateLabel={(inputValue: string) =>
-                    `Add "${inputValue}"`
-                  }
-                  styles={{
-                    control: (base) => ({
-                      ...base,
-                      borderRadius: "12px",
-                      borderWidth: "2px",
-                      borderColor: "#e5e7eb",
-                      padding: "4px",
-                      backgroundColor: "white",
-                      "&:hover": {
-                        borderColor: "#3b82f6",
-                      },
-                      "&:focus-within": {
-                        borderColor: "#3b82f6",
-                        boxShadow: "0 0 0 1px #3b82f6",
-                      },
-                    }),
-                    menu: (base) => ({
-                      ...base,
-                      backgroundColor: "white",
-                      borderRadius: "12px",
-                      border: "2px solid #e5e7eb",
-                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
-                    }),
-                    option: (base, state) => ({
-                      ...base,
-                      backgroundColor: state.isFocused ? "#dbeafe" : "white",
-                      color: "#1f2937",
-                      fontWeight: state.isFocused ? "500" : "400",
-                      "&:active": {
-                        backgroundColor: "#bfdbfe",
-                      },
-                    }),
-                    multiValue: (base) => ({
-                      ...base,
-                      backgroundColor: "#dbeafe",
-                      borderRadius: "8px",
-                    }),
-                    multiValueLabel: (base) => ({
-                      ...base,
-                      color: "#1e40af",
-                      fontWeight: "500",
-                    }),
-                    multiValueRemove: (base) => ({
-                      ...base,
-                      color: "#1e40af",
-                      "&:hover": {
-                        backgroundColor: "#3b82f6",
-                        color: "white",
-                      },
-                    }),
-                  }}
+                <input
+                  type="text"
+                  value={colorInput}
+                  onChange={(e) => handleColorInputChange(e.target.value)}
+                  className="w-full text-black p-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors duration-200 text-sm"
+                  placeholder="Black, Fuchsia, Heather Charcoal, Heather Grey, Navy, Peach, Pink, Red, Slate, White"
                 />
+                {selectedColors.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {selectedColors.map((color, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                      >
+                        {color.value}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <div className="flex items-center mt-2 text-sm text-gray-500">
-                  <span className="mr-2">✨</span>
-                  Type any color name and press Enter to add custom colors
+                  <span className="mr-2">📝</span>
+                  Separate multiple colors with commas (e.g., Black, Navy, White)
                 </div>
               </div>
 
@@ -490,8 +463,8 @@ export default function Home() {
                     placeholders
                   </li>
                   <li>
-                    • Select colors from the list or type custom colors (like
-                    Orange, Teal, etc.)
+                    • Enter colors separated by commas (like
+                    Black, Fuchsia, Heather Charcoal, etc.)
                   </li>
                   <li>
                     • Select sizes from the list or type custom sizes (like 4XL,
