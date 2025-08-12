@@ -68,7 +68,6 @@ export default function Home() {
     setGeneratedListings(combinations);
   };
 
-
   const clearResults = (): void => {
     setGeneratedListings([]);
   };
@@ -423,7 +422,10 @@ export default function Home() {
 
         {/* Generated Title Section Section */}
         {generatedListings.length > 0 && (
-         <GeneratedTitleSection generatedListings={generatedListings} clearResults={clearResults}/>
+          <GeneratedTitleSection
+            generatedListings={generatedListings}
+            clearResults={clearResults}
+          />
         )}
 
         {/* How It Works section */}

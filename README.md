@@ -32,65 +32,91 @@ This tool is my attempt to solve that real-world problem using my web developmen
 ## 💡 Example Use Case
 
 **Base Product**:  
-`Gildan Heavy Cotton Taped Neck T-Shirt for Women, 100% Cotton Short Sleeve`
+`Gildan Heavy Cotton T-Shirt for [color] Lovers, Size [size], Pack of [pack]`
 
 **Variants**:
-- Colors: Red, Navy, Purple, etc.
-- Sizes: S, M, L, XL, 2XL, 3XL, etc.
+- Colors: Black, Navy, Red, White, etc.
+- Sizes: XS, S, M, L, XL, 2XL, 3XL, 5XL, etc.
+- Pack Quantities: 1, 2, 5, 12, etc.
 
 **Generated Output**:
-
-Gildan Heavy Cotton Taped Neck T-Shirt for Women, 100% Cotton Short Sleeve Navy Tee, M
-
-Gildan Heavy Cotton Taped Neck T-Shirt for Women, 100% Cotton Short Sleeve Red Tee, XL
-
-... (all other combinations)
+```
+Gildan Heavy Cotton T-Shirt for Black Lovers, Size S, Pack of 1
+Gildan Heavy Cotton T-Shirt for Navy Lovers, Size M, Pack of 2
+Gildan Heavy Cotton T-Shirt for Red Lovers, Size L, Pack of 5
+... (all possible combinations)
+```
 
 
 ---
 
 ## ⚙️ Tech Stack
 
-- **Next.js** (Frontend)
-- **Tailwind CSS** (Styling)
-- **TypeScript** (Typing & maintainability)
+### Core Technologies
+- **Next.js 15.4.5** - React framework with App Router
+- **React 19.1.0** - UI library with latest features
+- **TypeScript** - Type safety and better developer experience
+- **Tailwind CSS v4** - Utility-first CSS framework
+
+### Key Libraries
+- **React Select** - Advanced dropdown components with creatable options
+- **Sonner** - Beautiful toast notifications
+- **Lucide React** - Modern icon library
+- **Class Variance Authority (CVA)** - Component variant management
+- **clsx & tailwind-merge** - Conditional styling utilities
+
+### Development Tools
+- **ESLint** - Code linting and quality
+- **PostCSS** - CSS processing
+- **Next Themes** - Theme management system
+
+### Deployment
+- **Vercel** - Seamless deployment and hosting
 
 Planned future features:
 - **AI-based content suggestions**
-- **CSV export**
+- **CSV export functionality**
 - **User accounts with saved templates**
 
 ---
 
 ## ✨ Current Features
 
-- ✅ **Intuitive Interface**: Clean, modern UI with responsive design
-- ✅ **Dynamic Placeholders**: Use `[color]` and `[size]` placeholders in your base title
-- ✅ **Custom Variants**: Add custom colors and sizes beyond the predefined options
-- ✅ **Real-time Generation**: Instantly generate all possible combinations
-- ✅ **One-Click Copy**: Copy all generated listings to clipboard
+- ✅ **Intuitive Interface**: Clean, modern UI with glassmorphism design and responsive layout
+- ✅ **Triple Placeholder System**: Use `[color]`, `[size]`, and `[pack]` placeholders in your base title
+- ✅ **Flexible Color Input**: Add colors via comma-separated input with real-time parsing
+- ✅ **Advanced Size Selection**: CreatableSelect dropdown with predefined sizes (XS to 5XL) plus custom size creation
+- ✅ **Pack Quantity Support**: Add numeric pack quantities with validation (numbers only)
+- ✅ **Smart Generation Logic**: Only replaces placeholders that exist in your base title
+- ✅ **Real-time Generation**: Instantly generate all possible combinations with a single click
+- ✅ **One-Click Copy**: Copy all generated listings to clipboard with toast feedback
 - ✅ **Results Management**: Clear results and start fresh anytime
-- ✅ **Visual Feedback**: Count display and organized listing preview
+- ✅ **Visual Feedback**: Live count display, numbered listing preview, and toast notifications
+- ✅ **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
 
 ---
 
-## 🎬 Demo
+## 🎬 How to Use
 
 **Step 1**: Enter your base product title with placeholders
 ```
-Gildan Heavy Cotton T-Shirt for [color] Lovers, Size [size], Premium Quality
+Gildan Heavy Cotton T-Shirt for [color] Lovers, Size [size], Pack of [pack]
 ```
 
-**Step 2**: Select or add custom colors and sizes
-- Colors: Black, White, Navy, Red + custom "Forest Green"
-- Sizes: S, M, L, XL + custom "XXS"
+**Step 2**: Add your variants
+- **Colors**: Type comma-separated values like "Black, Navy, Red, White"
+- **Sizes**: Select from dropdown (XS-5XL) or type custom sizes like "XXS, 4XL"
+- **Packs**: Type numeric values like "1, 2, 5, 12" (numbers only)
 
-**Step 3**: Generate and get results like:
+**Step 3**: Click "Generate Listings" and get results like:
 ```
-Gildan Heavy Cotton T-Shirt for Black Lovers, Size S, Premium Quality
-Gildan Heavy Cotton T-Shirt for White Lovers, Size M, Premium Quality
-... (20 total combinations)
+Gildan Heavy Cotton T-Shirt for Black Lovers, Size XS, Pack of 1
+Gildan Heavy Cotton T-Shirt for Black Lovers, Size XS, Pack of 2
+Gildan Heavy Cotton T-Shirt for Navy Lovers, Size S, Pack of 1
+... (all possible combinations)
 ```
+
+**Step 4**: Copy all results to clipboard with one click or clear to start over!
 
 ---
 
@@ -105,22 +131,33 @@ Gildan Heavy Cotton T-Shirt for White Lovers, Size M, Premium Quality
 ## 🗺️ Roadmap
 
 ### Phase 1: Core Features (✅ Complete)
-- [x] Basic title generation
-- [x] Custom color/size input
-- [x] Copy to clipboard
-- [x] Responsive design
+- [x] Triple placeholder system (`[color]`, `[size]`, `[pack]`)
+- [x] Advanced title generation with smart logic
+- [x] Comma-separated color input with real-time parsing
+- [x] CreatableSelect for sizes with predefined + custom options
+- [x] Numeric pack quantity validation and input
+- [x] One-click copy to clipboard with toast notifications
+- [x] Results management (clear/reset functionality)
+- [x] Modern glassmorphism UI design
+- [x] Full responsive design (mobile, tablet, desktop)
+- [x] TypeScript implementation
 
-### Phase 2: Enhanced Functionality (🚧 In Progress)
-- [ ] Bulk description generation
+### Phase 2: Enhanced Functionality (📋 Planned)
+- [ ] CSV/Excel export functionality
 - [ ] Template saving and loading
+- [ ] Bulk description generation
 - [ ] Undo/Redo functionality
+- [ ] Theme switching (dark/light mode)
+- [ ] Drag and drop reordering of results
 
-### Phase 3: Advanced Features (📋 Planned)
-- [ ] AI-powered content suggestions
-- [ ] User accounts and cloud sync
-- [ ] Analytics and usage tracking
-- [ ] Multiple marketplace optimizations
+### Phase 3: Advanced Features (🗺 Future Vision)
+- [ ] AI-powered content suggestions and optimization
+- [ ] User accounts with cloud sync
+- [ ] Usage analytics and insights
+- [ ] Multiple marketplace optimizations (Amazon, eBay, Etsy)
 - [ ] Batch processing for large datasets
+- [ ] API integration for direct platform uploads
+- [ ] Collaborative team features
 
 ---
 
@@ -129,13 +166,19 @@ Gildan Heavy Cotton T-Shirt for White Lovers, Size M, Premium Quality
 ### Common Issues
 
 **Issue**: "Nothing happens when I click Generate"  
-**Solution**: Make sure you've entered a base title with `[color]` and `[size]` placeholders, and selected at least one color and size.
+**Solution**: Make sure you've entered a base title with at least one placeholder (`[color]`, `[size]`, or `[pack]`) and selected at least one variant for each placeholder used in your title.
+
+**Issue**: "Pack values aren't being accepted"  
+**Solution**: Pack quantities must be numeric values only (e.g., 1, 2, 5, 12). Letters or special characters will be rejected.
 
 **Issue**: "Copy to clipboard doesn't work"  
 **Solution**: This feature requires HTTPS or localhost. If you're on a different domain, manually select and copy the text.
 
-**Issue**: "Custom colors/sizes aren't being added"  
-**Solution**: After typing your custom value, press Enter or click away from the input field to confirm the addition.
+**Issue**: "Custom sizes aren't being added"  
+**Solution**: After typing your custom size in the dropdown, press Enter to create and add it to your selection.
+
+**Issue**: "Colors entered with commas aren't showing up"  
+**Solution**: Make sure there are no extra spaces or special characters. Use format: "Black, Navy, Red" (comma + space separation works best).
 
 ### Getting Help
 
@@ -151,7 +194,7 @@ If you encounter any issues:
 
 **Jobayer Ahmed**  
 Javascript Developer & E-commerce Product Lister  
-[Portfolio](https://jobayerahmed.vercel.app/) | [LinkedIn](https://www.linkedin.com/in/jobayerahmmed7/) | [GitHub](https://github.com/ahmed-jobayer)
+[Portfolio](https://jobayerahmed.vercel.app/) | [LinkedIn](https://www.linkedin.com/in/jobayerahmmed7/) | [GitHub](https://github.com/jobayer-ahmed7)
 
 ---
 
@@ -209,18 +252,6 @@ The easiest way to deploy ListEngine is to use [Vercel](https://vercel.com/), th
 3. Deploy with zero configuration
 
 Alternatively, you can deploy to other platforms like Netlify, Railway, or any hosting service that supports Node.js applications.
-
----
-
-## 🧪 Testing
-
-Tests can be run using Jest. To execute tests, run:
-
-```shell
-npm run test
-```
-
-Ensure all new code is accompanied by appropriate tests.
 
 ---
 
