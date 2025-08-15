@@ -44,23 +44,32 @@ export default function Home() {
     const packsToUse =
       selectedPacks.length > 0 ? selectedPacks : [{ value: "", label: "" }];
 
+    // Create combinations
     colorsToUse.forEach((color: Option) => {
       sizesToUse.forEach((size: Option) => {
         packsToUse.forEach((pack: Option) => {
-          let listing = baseProduct;
+          // Create a new string for each combination
+          let listing = baseProduct.slice();
 
-          // Replace placeholders only if they exist in the base product and have values
-          if (color.value && listing.includes("[color]")) {
-            listing = listing.replace(/\[color\]/g, color.value);
+          // Replace placeholders with case-sensitive exact matches
+          if (color.value) {
+            // Use split and join to replace all occurrences while preserving case
+            listing = listing.split('[Color]').join(color.value)
+                           .split('[color]').join(color.value);
           }
-          if (size.value && listing.includes("[size]")) {
-            listing = listing.replace(/\[size\]/g, size.value);
+          if (size.value) {
+            listing = listing.split('[Size]').join(size.value)
+                           .split('[size]').join(size.value);
           }
-          if (pack.value && listing.includes("[pack]")) {
-            listing = listing.replace(/\[pack\]/g, pack.value);
+          if (pack.value) {
+            listing = listing.split('[Pack]').join(pack.value)
+                           .split('[pack]').join(pack.value);
           }
 
-          combinations.push(listing);
+          // Only add if the listing is unique
+          if (!combinations.includes(listing)) {
+            combinations.push(listing);
+          }
         });
       });
     });
