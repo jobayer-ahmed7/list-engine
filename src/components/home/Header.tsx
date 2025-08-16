@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Header = () => {
   return (
     <div className="text-center mb-12">
@@ -28,6 +30,10 @@ const Header = () => {
           <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
           <span>Easy to use</span>
         </div>
+      </div>
+      <div className="border my-5 max-w-xl mx-auto flex gap-4">
+        <Link href={"/title"}></Link>
+        <Link href={"/description"}></Link>
       </div>
     </div>
   );
