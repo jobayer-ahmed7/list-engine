@@ -1,11 +1,12 @@
-"use client"
+"use client";
 import GeneratedTitleSection from "@/components/title/GeneratedTitleSection";
 import HowItWorks from "@/components/title/HowItWorks";
 import { Option, sizes } from "@/constants/size";
+import { ArrowRight, ArrowRightSquare } from "lucide-react";
 import React, { useState } from "react";
 import { ActionMeta, MultiValue } from "react-select";
 import CreatableSelect from "react-select/creatable";
-import { toast } from "sonner"; 
+import { toast } from "sonner";
 
 const GenerateTitlePage = () => {
   const [baseProduct, setBaseProduct] = useState<string>("");
@@ -239,6 +240,9 @@ const GenerateTitlePage = () => {
                   className="react-select-container"
                   classNamePrefix="react-select"
                   placeholder="Choose or type custom sizes..."
+                  menuPortalTarget={
+                    typeof document !== "undefined" ? document.body : null
+                  }
                   formatCreateLabel={(inputValue: string) =>
                     `Add "${inputValue}"`
                   }
@@ -266,6 +270,10 @@ const GenerateTitlePage = () => {
                       borderRadius: "12px",
                       border: "2px solid rgba(229, 231, 235, 0.5)",
                       boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.15)",
+                    }),
+                    menuPortal: (base) => ({
+                      ...base,
+                      zIndex: 9999,
                     }),
                     option: (base, state) => ({
                       ...base,
@@ -324,6 +332,9 @@ const GenerateTitlePage = () => {
                   className="react-select-container"
                   classNamePrefix="react-select"
                   placeholder="Type pack quantities (numbers only)..."
+                  menuPortalTarget={
+                    typeof document !== "undefined" ? document.body : null
+                  }
                   formatCreateLabel={(inputValue: string) =>
                     `Add "${inputValue}"`
                   }
@@ -351,6 +362,10 @@ const GenerateTitlePage = () => {
                       borderRadius: "12px",
                       border: "2px solid rgba(229, 231, 235, 0.5)",
                       boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.15)",
+                    }),
+                    menuPortal: (base) => ({
+                      ...base,
+                      zIndex: 9999,
                     }),
                     option: (base, state) => ({
                       ...base,
@@ -394,30 +409,15 @@ const GenerateTitlePage = () => {
             </div>
 
             {/* Generate Button */}
-            <div className="text-center mt-2">
-              <div className="relative inline-block">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-lg opacity-50 animate-pulse"></div>
-                <button
-                  onClick={handleGenerate}
-                  className="relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold py-5 px-10 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg flex items-center gap-3"
-                >
-                  <span className="text-2xl animate-bounce">✨</span>
-                  <span>Generate Listings</span>
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
-                </button>
-              </div>
+            <div className="flex justify-center mt-2  ">
+              <button
+                onClick={handleGenerate}
+                className="relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white font-bold py-5 px-10 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 text-lg flex items-center gap-3"
+              >
+                <span className="text-2xl animate-bounce">✨</span>
+                <span>Generate Listings</span>
+                <ArrowRight />
+              </button>
             </div>
           </div>
         </div>
